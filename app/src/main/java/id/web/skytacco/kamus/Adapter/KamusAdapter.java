@@ -22,12 +22,14 @@ public class KamusAdapter extends RecyclerView.Adapter<KamusAdapter.SearchHolder
     public KamusAdapter() {
 
     }
+
     @NonNull
     @Override
     public SearchHolder onCreateViewHolder(@NonNull ViewGroup mviewGroup, int viewType) {
         View view = LayoutInflater.from(mviewGroup.getContext()).inflate(R.layout.content_main_dictionary, mviewGroup, false);
         return new SearchHolder(view);
     }
+
     public void replaceAll(ArrayList<KamusModel> items) {
         WordList = items;
         notifyDataSetChanged();
@@ -44,12 +46,16 @@ public class KamusAdapter extends RecyclerView.Adapter<KamusAdapter.SearchHolder
     }
 
     public static class SearchHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.txtWord) TextView txtWord;
-        @BindView(R.id.txtDescription) TextView txtDescription;
+        @BindView(R.id.txtWord)
+        TextView txtWord;
+        @BindView(R.id.txtDesc)
+        TextView txtDescription;
+
         SearchHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
+
         public void bind(final KamusModel mKamusModel) {
             txtWord.setText(mKamusModel.getWord());
             txtDescription.setText(mKamusModel.getDescription());

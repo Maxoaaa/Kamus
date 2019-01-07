@@ -47,7 +47,7 @@ public class KamusHelper {
 
     public ArrayList<KamusModel> getDataByName(String keyword, boolean chooseLang) {
         KamusModel mKamusModel;
-        ArrayList<KamusModel> ListKosakata = new ArrayList<>();
+        ArrayList<KamusModel> list = new ArrayList<>();
         Cursor cursor = cursorDataByName(keyword, chooseLang);
 
         cursor.moveToFirst();
@@ -57,13 +57,12 @@ public class KamusHelper {
                 mKamusModel.setId((cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.KamusColumns._ID))));
                 mKamusModel.setWord(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.KamusColumns.WORD)));
                 mKamusModel.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.KamusColumns.DESCRIBE)));
-                ListKosakata.add(mKamusModel);
-
+                list.add(mKamusModel);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
         }
         cursor.close();
-        return ListKosakata;
+        return list;
     }
 
     private Cursor cursorAllData(boolean chooseLang) {
@@ -76,7 +75,7 @@ public class KamusHelper {
 
     public ArrayList<KamusModel> getAllData(boolean chooseLang) {
         KamusModel mKamusModel;
-        ArrayList<KamusModel> ListKosakata = new ArrayList<>();
+        ArrayList<KamusModel> list = new ArrayList<>();
         Cursor cursor = cursorAllData(chooseLang);
 
         cursor.moveToFirst();
@@ -86,13 +85,13 @@ public class KamusHelper {
                 mKamusModel.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.KamusColumns._ID)));
                 mKamusModel.setWord(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.KamusColumns.WORD)));
                 mKamusModel.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.KamusColumns.DESCRIBE)));
-                ListKosakata.add(mKamusModel);
+                list.add(mKamusModel);
 
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
         }
         cursor.close();
-        return ListKosakata;
+        return list;
     }
 
     //Gunakan method ini untuk memulai sesi query transaction
