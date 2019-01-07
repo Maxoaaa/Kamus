@@ -8,5 +8,16 @@
     <string name="action_settings">Settings</string>
     <string name="desk_logo">gambar logo</string>
     <string name="_kosong" />
-    <string name="first_run">first run"</string>
+    <string name="first_run">first run</string>
+    <string name="ento_in">English to Indonesia</string>
+    <string name="into_en">Indonesia ke Inggris</string>
+    <string name="find_word">Find a Word</string>
+    <string name="find_word2">Temukan Kosakata</string>
+    <string name="english_indonesia">English - Indonesia</string>
+    <string name="indonesia_english">Indonesia - English</string>
+    <string name="support">Support</string>
+    <string name="share">Share</string>
+    <string name="about">About</string>
+    <string name="describe_here">Describe here</string>
+    <string name="a_word">a Word</string>
 </resources>

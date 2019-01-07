@@ -25,19 +25,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             WORD + " TEXT NOT NULL, " +
             DESCRIBE + " TEXT NOT NULL);";
 
-    public DatabaseHelper(Context context) {
+    DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+    public void onCreate(SQLiteDatabase dbku) {
+        dbku.execSQL(CREATE_TABLE_ID_TO_EN);
+        dbku.execSQL(CREATE_TABLE_EN_TO_ID);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EN_ID);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ID_EN);
-        onCreate(db);
+    public void onUpgrade(SQLiteDatabase dbku, int oldVersion, int newVersion) {
+        dbku.execSQL("DROP TABLE IF EXISTS " + TABLE_EN_ID);
+        dbku.execSQL("DROP TABLE IF EXISTS " + TABLE_ID_EN);
+        onCreate(dbku);
     }
 }

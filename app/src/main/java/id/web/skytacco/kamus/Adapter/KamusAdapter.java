@@ -17,7 +17,7 @@ import id.web.skytacco.kamus.Model.KamusModel;
 import id.web.skytacco.kamus.R;
 
 public class KamusAdapter extends RecyclerView.Adapter<KamusAdapter.SearchHolder> {
-    private ArrayList<KamusModel> WordList;
+    private ArrayList<KamusModel> WordList = new ArrayList<>();
 
     public KamusAdapter() {
 
@@ -42,12 +42,13 @@ public class KamusAdapter extends RecyclerView.Adapter<KamusAdapter.SearchHolder
     public int getItemCount() {
         return WordList.size();
     }
+
     public static class SearchHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txtWord) TextView txtWord;
         @BindView(R.id.txtDescription) TextView txtDescription;
-        SearchHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        SearchHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
         public void bind(final KamusModel mKamusModel) {
             txtWord.setText(mKamusModel.getWord());

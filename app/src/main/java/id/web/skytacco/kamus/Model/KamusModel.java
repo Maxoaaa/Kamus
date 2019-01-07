@@ -44,6 +44,11 @@ public class KamusModel implements Parcelable {
         dest.writeString(this.description);
     }
 
+    public KamusModel(String word, String description) {
+        this.word = word;
+        this.description = description;
+    }
+
     public KamusModel() {
     }
 
