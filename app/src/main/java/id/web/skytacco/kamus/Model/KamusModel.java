@@ -4,9 +4,34 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class KamusModel implements Parcelable {
+    public static final Parcelable.Creator<KamusModel> CREATOR = new Parcelable.Creator<KamusModel>() {
+        @Override
+        public KamusModel createFromParcel(Parcel source) {
+            return new KamusModel(source);
+        }
+
+        @Override
+        public KamusModel[] newArray(int size) {
+            return new KamusModel[size];
+        }
+    };
     private int id;
     private String word;
     private String description;
+
+    public KamusModel(String word, String description) {
+        this.word = word;
+        this.description = description;
+    }
+
+    public KamusModel() {
+    }
+
+    private KamusModel(Parcel in) {
+        this.id = in.readInt();
+        this.word = in.readString();
+        this.description = in.readString();
+    }
 
     public int getId() {
         return id;
@@ -43,30 +68,4 @@ public class KamusModel implements Parcelable {
         dest.writeString(this.word);
         dest.writeString(this.description);
     }
-
-    public KamusModel(String word, String description) {
-        this.word = word;
-        this.description = description;
-    }
-
-    public KamusModel() {
-    }
-
-    private KamusModel(Parcel in) {
-        this.id = in.readInt();
-        this.word = in.readString();
-        this.description = in.readString();
-    }
-
-    public static final Parcelable.Creator<KamusModel> CREATOR = new Parcelable.Creator<KamusModel>() {
-        @Override
-        public KamusModel createFromParcel(Parcel source) {
-            return new KamusModel(source);
-        }
-
-        @Override
-        public KamusModel[] newArray(int size) {
-            return new KamusModel[size];
-        }
-    };
 }

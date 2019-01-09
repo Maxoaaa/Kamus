@@ -21,7 +21,8 @@ import id.web.skytacco.kamus.Model.KamusModel;
 import id.web.skytacco.kamus.Prefs.AppPreference;
 
 public class Splashscreen extends AppCompatActivity {
-    @BindView(R.id.progressBar) ProgressBar pgsBar;
+    @BindView(R.id.progressBar)
+    ProgressBar pgsBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +33,34 @@ public class Splashscreen extends AppCompatActivity {
         new DatadiProses().execute();
     }
 
+    public ArrayList<KamusModel> preLoadRaw(int selection) {
+        ArrayList<KamusModel> list = new ArrayList<>();
+        String line;
+        BufferedReader reader;
+        try {
+            Resources res = getResources();
+            InputStream raw_dict = res.openRawResource(selection);
+
+            reader = new BufferedReader(new InputStreamReader(raw_dict));
+            do {
+                line = reader.readLine();
+                String[] splitstr = line.split("\t");
+                KamusModel mKamusModel;
+                mKamusModel = new KamusModel(splitstr[0], splitstr[1]);
+                list.add(mKamusModel);
+            } while (true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
     @SuppressLint("StaticFieldLeak")
     private class DatadiProses extends AsyncTask<Void, Integer, Void> {
         KamusHelper mKamusHelper;
         AppPreference mAppPref;
-        double progress ;
+        double progress;
         double maxprogress = 100;
 
         @Override
@@ -58,7 +82,8 @@ public class Splashscreen extends AppCompatActivity {
                 mKamusHelper.open();
 
                 Double progressMaxInsert = 100.0;
-                Double progressDiff = (progressMaxInsert - progress) / (dictEnglish.size() + dictIndonesia.size());
+                int totalProgress = dictEnglish.size() + dictIndonesia.size();
+                Double progressDiff = (progressMaxInsert - progress) / totalProgress;
 
                 mKamusHelper.insertTransaction(dictEnglish, true);
                 progress += progressDiff;
@@ -75,15 +100,15 @@ public class Splashscreen extends AppCompatActivity {
             } else {
                 try {
                     synchronized (this) {
-                        this.wait(2000);
+                        //this.wait(2000);
 
                         publishProgress(50);
 
-                        this.wait(1500);
+                        //this.wait(1100);
                         publishProgress((int) maxprogress);
                     }
                 } catch (Exception e) {
-                    Log.e("Tag","Error :"+e.getMessage());
+                    Log.e("Tag", "Error :" + e.getMessage());
                 }
             }
             return null;
@@ -100,28 +125,5 @@ public class Splashscreen extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-    }
-
-    public ArrayList<KamusModel> preLoadRaw(int selection) {
-        ArrayList<KamusModel> list = new ArrayList<>();
-        String line;
-        BufferedReader reader;
-        try {
-            Resources res = getResources();
-            InputStream raw_dict = res.openRawResource(selection);
-
-            reader = new BufferedReader(new InputStreamReader(raw_dict));
-            do {
-                line = reader.readLine();
-                String[] splitstr = line.split("\t");
-                KamusModel mKamusModel;
-                mKamusModel = new KamusModel(splitstr[0], splitstr[1]);
-                list.add(mKamusModel);
-            } while (line != null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return list;
     }
 }

@@ -1,9 +1,11 @@
 package id.web.skytacco.kamus;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-
+        FragmentManager frm = getSupportFragmentManager();
         mKamusHelper = new KamusHelper(this);
         InpSearch.onActionViewExpanded();
         InpSearch.setOnQueryTextListener(this);
@@ -100,14 +102,38 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        //Fragment fragment = null;
+        Bundle bundle = new Bundle();
+        //String title;
         if (id == R.id.engtoin) {
             chooseLang = true;
+            //fragment = null;
             DatadiProses();
         }
         if (id == R.id.intoeng) {
             chooseLang = false;
+            //fragment = null;
             DatadiProses();
         }
+        if (id == R.id.nav_share) {
+            Intent si = new Intent(android.content.Intent.ACTION_SEND);
+            si.setType("text/plain");
+            si.putExtra(android.content.Intent.EXTRA_SUBJECT, "Handoyo Oficial");
+            si.putExtra(android.content.Intent.EXTRA_TEXT, "Dapatkan Informasi tentang Aplikasi Lainnya. Kunjungi https://skytacco.web.id/ \n atau hubungi email REALTH99@GMAIL.COM");
+            startActivity(Intent.createChooser(si, "Share via"));
+        }
+       /* if (id == R.id.nav_about) {
+            title = "About Us";
+            fragment = new AboutFragment();
+            bundle.putString(AboutFragment.EXTRAS, title);
+            fragment.setArguments(bundle);
+        }
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.id_content_main, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }*/
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

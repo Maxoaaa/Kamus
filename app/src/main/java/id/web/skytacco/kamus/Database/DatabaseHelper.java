@@ -11,9 +11,7 @@ import static id.web.skytacco.kamus.Database.DatabaseContract.TABLE_EN_ID;
 import static id.web.skytacco.kamus.Database.DatabaseContract.TABLE_ID_EN;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static String DATABASE_NAME = "repositorykamus";
     private static final int DATABASE_VERSION = 1;
-
     private static final String CREATE_TABLE_ID_TO_EN = "CREATE TABLE " + TABLE_ID_EN +
             " (" +
             _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -24,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             WORD + " TEXT NOT NULL, " +
             DESCRIBE + " TEXT NOT NULL);";
+    private static String DATABASE_NAME = "repositorykamus";
 
     DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

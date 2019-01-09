@@ -16,11 +16,11 @@ import static id.web.skytacco.kamus.Database.DatabaseContract.KamusColumns.DESCR
 import static id.web.skytacco.kamus.Database.DatabaseContract.KamusColumns.WORD;
 
 public class KamusHelper {
+    private static String T_ENGLISH = DatabaseContract.TABLE_EN_ID;
+    private static String T_INDONESIA = DatabaseContract.TABLE_ID_EN;
     private Context context;
     private DatabaseHelper mDatabaseHelper;
     private SQLiteDatabase database;
-    private static String T_ENGLISH = DatabaseContract.TABLE_EN_ID;
-    private static String T_INDONESIA = DatabaseContract.TABLE_ID_EN;
 
     public KamusHelper(Context context) {
         this.context = context;
